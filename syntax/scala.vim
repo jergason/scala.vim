@@ -12,6 +12,9 @@ endif
 syn case match
 syn sync minlines=50
 
+" generic identifiers
+syn match scalaIdentifier "\<[a-zA-Z][_$a-zA-Z0-9]*"
+
 " most Scala keywords
 syn keyword scalaKeyword abstract case catch do else extends final finally for forSome if implicit lazy match new null override private protected requires return sealed super this throw try type while with yield
 syn match scalaKeyword "=>"
@@ -99,6 +102,7 @@ syn match scalaXmlComment "<!--\_[^>]*-->" contained
 syn sync fromstart
 
 " map Scala groups to standard groups
+hi link scalaIdentifier Normal
 hi link scalaKeyword Keyword
 hi link scalaPackage Include
 hi link scalaImport Include
