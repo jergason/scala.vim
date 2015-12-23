@@ -12,6 +12,9 @@ endif
 syn case match
 syn sync minlines=50
 
+" generic identifiers
+syn match scalaIdentifier "\<[a-zA-Z][_$a-zA-Z0-9]*"
+
 " most Scala keywords
 syn keyword scalaKeyword abstract case catch do else extends final finally for forSome if implicit lazy match new null override private protected requires return sealed super this throw try type while with yield
 syn match scalaKeyword "=>"
@@ -56,13 +59,13 @@ syn match scalaType ":\s*\(=>\s*\)\?[._$a-zA-Z0-9]\+\(\[[^]]*\]\+\)\?\(\s*\(<:\|
 
 " comments
 syn match scalaTodo "[tT][oO][dD][oO]" contained
-syn match scalaLineComment "//.*" contains=scalaTodo
-syn region scalaComment start="/\*" end="\*/" contains=scalaTodo
+syn match scalaLineComment "//.*" contains=scalaTodo,@Spell
+syn region scalaComment start="/\*" end="\*/" contains=scalaTodo,@Spell
 syn case ignore
 syn include @scalaHtml syntax/html.vim
 unlet b:current_syntax
 syn case match
-syn region scalaDocComment start="/\*\*" end="\*/" contains=scalaDocTags,scalaTodo,@scalaHtml keepend
+syn region scalaDocComment start="/\*\*" end="\*/" contains=scalaDocTags,scalaTodo,@scalaHtml,@Spell keepend
 syn region scalaDocTags start="{@\(link\|linkplain\|inherit[Dd]oc\|doc[rR]oot\|value\)" end="}" contained
 syn match scalaDocTags "@[a-z]\+" contained
 
@@ -99,6 +102,7 @@ syn match scalaXmlComment "<!--\_[^>]*-->" contained
 syn sync fromstart
 
 " map Scala groups to standard groups
+hi link scalaIdentifier Normal
 hi link scalaKeyword Keyword
 hi link scalaPackage Include
 hi link scalaImport Include
